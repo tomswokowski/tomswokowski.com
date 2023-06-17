@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
-  return <div className="font-bold"></div>;
+  return <div>Posts Page</div>;
 };
 
 export default Home;
