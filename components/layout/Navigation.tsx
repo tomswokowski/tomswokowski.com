@@ -1,26 +1,50 @@
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 const Navigation = () => {
   return (
-    <div>
-      <div className="flex justify-between items-center">
+    <div className="p-4">
+      <div className="flex justify-between items-center text-primary pb-6">
         <div>
-          <h1>Tom Swokowski's Blog</h1>
-          <h3>Thoughts About Software Development</h3>
+          <h1 className="text-base font-semibold">Tom Swokowski's Blog</h1>
+          <h3 className="text-sm">Things About Tech</h3>
         </div>
         <div className="flex space-x-4">
-          <a href="github.com">GitHub</a>
-          <a href="linkedin.com">LinkedIn</a>
-          <a href="twitter.com">Twitter</a>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon
+              icon={faGithub}
+              className="text-primary"
+              size="xl"
+            />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon
+              icon={faLinkedin}
+              className="text-primary"
+              size="xl"
+            />
+          </a>
+          <FontAwesomeIcon
+            icon={faSearch}
+            className="text-primary cursor-pointer"
+            size="xl"
+          />
         </div>
       </div>
       <nav>
-        <ul className="flex space-x-4">
+        <ul className="flex space-x-4 text-primary">
           <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/blog">Blog</Link>
+            <Link href="/">Posts</Link>
           </li>
           <li>
             <Link href="/projects">Projects</Link>
