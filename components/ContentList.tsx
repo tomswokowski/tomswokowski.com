@@ -20,6 +20,8 @@ const ContentList: React.FC<ContentListProps> = ({ content, type }) => {
           key={item.slug}
           title={item.title}
           content={item.content}
+          slug={item.slug}
+          type={type}
         />
       ))}
     </div>

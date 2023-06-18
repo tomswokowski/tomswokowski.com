@@ -44,6 +44,15 @@ const Navigation = () => {
   const linkedinUrl = process.env.NEXT_PUBLIC_LINKEDIN_URL;
   const githubUrl = process.env.NEXT_PUBLIC_GITHUB_URL;
 
+  // Check if current page is a slug page
+  const isSlugPage = router.pathname.includes('[slug]');
+
+  // Determine if the page is a project slug
+  const isProjectSlug = router.pathname.includes('projects');
+
+  // Decide the back path based on the type of slug
+  const backPath = isProjectSlug ? '/projects' : '/';
+
   return (
     <div
       className={`border-b-2 bg-white w-full z-10 transition-all duration-500 sticky ${
@@ -51,11 +60,19 @@ const Navigation = () => {
       }`}
     >
       <div className="flex justify-between items-center text-primary p-4 pb-4">
+        {isSlugPage && (
+          <Link
+            className="mr-4"
+            href={backPath}
+          >
+            Back
+          </Link>
+        )}
         <div>
           <h1 className="text-base font-semibold">
             Tom Swokowski&rsquo;s Blog
           </h1>
-          <h3 className="text-sm">Things About Tech</h3>
+          <h3 className="text-sm">Tech and Other Things</h3>
         </div>
         <div className="flex space-x-4">
           <a
@@ -87,28 +104,30 @@ const Navigation = () => {
           />
         </div>
       </div>
-      <nav className="px-4">
-        <ul className="flex space-x-8 text-primary font-semibold">
-          <li
-            className={
-              isActive('/')
-                ? 'pb-2 border-b-2 border-secondary text-secondary'
-                : 'pb-2 border-b-2 border-transparent'
-            }
-          >
-            <Link href="/">Posts</Link>
-          </li>
-          <li
-            className={
-              isActive('/projects')
-                ? 'pb-2 border-b-2 border-secondary text-secondary'
-                : 'pb-2 border-b-2 border-transparent'
-            }
-          >
-            <Link href="/projects">Projects</Link>
-          </li>
-        </ul>
-      </nav>
+      {!isSlugPage && (
+        <nav className="px-4">
+          <ul className="flex space-x-8 text-primary font-semibold">
+            <li
+              className={
+                isActive('/')
+                  ? 'pb-2 border-b-2 border-secondary text-secondary'
+                  : 'pb-2 border-b-2 border-transparent'
+              }
+            >
+              <Link href="/">Posts</Link>
+            </li>
+            <li
+              className={
+                isActive('/projects')
+                  ? 'pb-2 border-b-2 border-secondary text-secondary'
+                  : 'pb-2 border-b-2 border-transparent'
+              }
+            >
+              <Link href="/projects">Projects</Link>
+            </li>
+          </ul>
+        </nav>
+      )}
     </div>
   );
 };
