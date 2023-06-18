@@ -26,15 +26,15 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
     <div className="p-4 border-b mx-auto max-w-screen-md">
       <Link href={href}>
         <div className="flex justify-between">
-          <div>
-            <h2>{title}</h2>
-            <p>{description}</p>
+          <div className="w-2/3 md:w-1/2">
+            <h2 className="text-xl pb-2">{title}</h2>
+            <p className="text-sm">{description}</p>
           </div>
           <img src="https://placehold.co/75x75" alt="placeholder" />
         </div>
 
         <div className="flex justify-between items-center mt-4 text-sm">
-          <div className="flex space-x-2">
+          <div className="flex justify-start space-x-1 text-xs">
             <time>{datePosted}</time>
             <span> • </span>
             <span>{author}</span>

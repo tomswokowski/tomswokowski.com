@@ -16,7 +16,7 @@ type ContentListProps = {
 
 const ContentList: React.FC<ContentListProps> = ({ contentItems, type }) => {
   return (
-    <div>
+    <div className="mx-3 py-4">
       {contentItems.map((item) => (
         <ContentListItem
           key={item.slug}
