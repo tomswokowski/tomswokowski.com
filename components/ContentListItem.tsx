@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import React from 'react';
 
@@ -21,12 +23,30 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
   const href = type === 'posts' ? `/${slug}` : `/${type}/${slug}`;
 
   return (
-    <div>
+    <div className="p-4 border-b mx-auto max-w-screen-md">
       <Link href={href}>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <p>{datePosted}</p>
-        <p>{author}</p>
+        <div className="flex justify-between">
+          <div>
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </div>
+          <img src="https://placehold.co/75x75" alt="placeholder" />
+        </div>
+
+        <div className="flex justify-between items-center mt-4 text-sm">
+          <div className="flex space-x-2">
+            <time>{datePosted}</time>
+            <span> • </span>
+            <span>{author}</span>
+          </div>
+          <button>
+            <FontAwesomeIcon
+              icon={faShareFromSquare}
+              className="text-primary"
+              size="sm"
+            />
+          </button>
+        </div>
       </Link>
     </div>
   );
