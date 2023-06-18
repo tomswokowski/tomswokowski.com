@@ -14,7 +14,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
       aria-hidden="true"
       className="fixed inset-0 z-50 w-full h-full p-4 overflow-x-hidden overflow-y-auto bg-white dark:bg-gray-700"
     >
-      <div className="relative w-full max-w-2xl max-h-full mx-auto">
+      <div className="relative w-full max-w-2xl max-h-full mx-auto mt-6">
         {/* Modal content */}
         <div className="relative ">
           {/* Modal header */}
@@ -25,18 +25,18 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search..."
-              className="w-full p-2 border-b"
+              className="w-full p-2 border-b focus:outline-none focus:bg-transparent"
             />
             {/* Search Results should be listed here */}
 
             <button
               type="button"
-              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-2 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              className="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm p-2 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
               onClick={onClose}
             >
               <svg
                 aria-hidden="true"
-                className="w-5 h-5"
+                className="w-7 h-7"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
