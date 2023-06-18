@@ -4,7 +4,15 @@ import ContentDetail from '../components/ContentDetail';
 import { getContentData, getAllContent } from '../utils/content';
 
 const Post: NextPage<{
-  post: { slug: string; title: string; content: string };
+  post: {
+    slug: string;
+    title: string;
+    content: string;
+    description: string;
+    datePosted: string;
+    author: string;
+    type: string;
+  };
 }> = ({ post }) => {
   const router = useRouter();
 
