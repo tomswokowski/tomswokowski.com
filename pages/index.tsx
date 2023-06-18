@@ -3,11 +3,17 @@ import ContentList from '../components/ContentList';
 import { getAllContent } from '../utils/content';
 
 const Home: NextPage<{
-  posts: { slug: string; title: string; content: string }[];
+  posts: {
+    slug: string;
+    title: string;
+    description: string;
+    datePosted: string;
+    author: string;
+  }[];
 }> = ({ posts }) => {
   return (
     <>
-      <ContentList content={posts} type="posts" />
+      <ContentList contentItems={posts} type="posts" />
     </>
   );
 };
