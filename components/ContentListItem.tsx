@@ -33,20 +33,32 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
       : description;
 
   return (
-    <div className="p-4 border-b mx-auto max-w-screen-md">
+    <div className="p-4 border-b mx-auto max-w-screen-md flex flex-col">
       <Link href={href}>
-        <div className="flex justify-between">
-          <div className="w-2/3 md:w-1/2">
+        {type === 'projects' ? (
+          <div className="flex flex-col w-full">
+            <img
+              src="https://placehold.co/75x75"
+              alt="placeholder"
+              className="w-full"
+            />
             <h2 className="text-md font-semibold pb-2">{title}</h2>
-            <p className="text-sm block md:hidden">
-              {truncatedDescriptionShort}
-            </p>
-            <p className="text-sm hidden md:block">
-              {truncatedDescriptionLong}
-            </p>
+            <p className="text-sm">{truncatedDescriptionLong}</p>
           </div>
-          <img src="https://placehold.co/75x75" alt="placeholder" />
-        </div>
+        ) : (
+          <div className="flex justify-between items-start w-full">
+            <div className="w-2/3 md:w-1/2">
+              <h2 className="text-md font-semibold pb-2">{title}</h2>
+              <p className="text-sm block md:hidden">
+                {truncatedDescriptionShort}
+              </p>
+              <p className="text-sm hidden md:block">
+                {truncatedDescriptionLong}
+              </p>
+            </div>
+            <img src="https://placehold.co/75x75" alt="placeholder" />
+          </div>
+        )}
 
         <div className="flex justify-between items-center mt-4 text-sm">
           <div className="flex justify-start space-x-1 text-xs">
