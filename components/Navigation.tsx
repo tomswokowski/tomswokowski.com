@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 // Custom hook for detecting the direction of the scroll
@@ -61,11 +61,12 @@ const Navigation = () => {
     >
       <div className="flex justify-between items-center text-primary p-4 pb-4">
         {isSlugPage && (
-          <Link
-            className="mr-4"
-            href={backPath}
-          >
-            Back
+          <Link href={backPath}>
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              className="text-primary"
+              size="xl"
+            />
           </Link>
         )}
         <div>
