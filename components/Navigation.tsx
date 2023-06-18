@@ -1,45 +1,44 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
+function useScrollDirection() {
+  const [scrollDirection, setScrollDirection] = useState('up');
+
+  useEffect(() => {
+    let lastScrollY = window.pageYOffset;
+
+    const updateScrollDirection = () => {
+      const scrollY = window.pageYOffset;
+      const direction = scrollY > lastScrollY ? 'down' : 'up';
+      if (
+        direction !== scrollDirection &&
+        (scrollY - lastScrollY > 5 || scrollY - lastScrollY < -5)
+      ) {
+        setScrollDirection(direction);
+      }
+      lastScrollY = scrollY > 0 ? scrollY : 0;
+    };
+    window.addEventListener('scroll', updateScrollDirection);
+    return () => window.removeEventListener('scroll', updateScrollDirection);
+  }, [scrollDirection]);
+
+  return scrollDirection;
+}
+
 const Navigation = () => {
   const router = useRouter();
-  const [isHidden, setIsHidden] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const navHeight = 112; // the original height of the nav
-  const navRef = useRef<HTMLDivElement>(null);
+  const scrollDirection = useScrollDirection();
 
   const isActive = (pathname: string) => router.pathname === pathname;
 
-  const checkScroll = useCallback(() => {
-    const currentScrollPos = window.pageYOffset;
-    const visible =
-      currentScrollPos < navHeight || prevScrollPos > currentScrollPos;
-    setIsHidden(!visible);
-    setPrevScrollPos(currentScrollPos);
-  }, [navHeight, prevScrollPos]);
-
-  useEffect(() => {
-    window.addEventListener('scroll', checkScroll);
-    return () => window.removeEventListener('scroll', checkScroll);
-  }, [checkScroll]);
-
-  useEffect(() => {
-    if (navRef.current) {
-      navRef.current.style.top = isHidden ? `-${navHeight}px` : '0';
-      navRef.current.style.position =
-        prevScrollPos > navHeight ? 'fixed' : 'relative';
-    }
-  }, [prevScrollPos, isHidden, navHeight]);
-
   return (
     <div
-      ref={navRef}
-      className={`border-b-2 bg-white w-full z-10 transition-all duration-300 ${
-        prevScrollPos > navHeight ? 'fixed' : 'relative'
+      className={`border-b-2 bg-white w-full z-10 transition-all duration-500 sticky ${
+        scrollDirection === 'down' ? '-top-28' : 'top-0'
       }`}
     >
       <div className="flex justify-between items-center text-primary p-4 pb-4">
