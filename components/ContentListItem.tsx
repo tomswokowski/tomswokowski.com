@@ -40,7 +40,7 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
             <img
               src="https://placehold.co/75x75"
               alt="placeholder"
-              className="w-full h-30 md:h-32 object-cover"
+              className="w-full h-56 md:h-80 object-cover"
             />
             <h2 className="text-md font-semibold pb-2">{title}</h2>
             <p className="text-sm">{description}</p>
