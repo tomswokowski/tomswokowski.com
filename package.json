@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
     "gray-matter": "^4.0.3",
     "next": "13.4.5",
