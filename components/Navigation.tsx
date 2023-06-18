@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
+// Custom hook for detecting the direction of the scroll
 function useScrollDirection() {
   const [scrollDirection, setScrollDirection] = useState('up');
 
@@ -14,6 +15,7 @@ function useScrollDirection() {
     const updateScrollDirection = () => {
       const scrollY = window.pageYOffset;
       const direction = scrollY > lastScrollY ? 'down' : 'up';
+      // Only updating the scroll direction if there is a substantial scroll (more than 5 pixels)
       if (
         direction !== scrollDirection &&
         (scrollY - lastScrollY > 5 || scrollY - lastScrollY < -5)
@@ -23,16 +25,19 @@ function useScrollDirection() {
       lastScrollY = scrollY > 0 ? scrollY : 0;
     };
     window.addEventListener('scroll', updateScrollDirection);
+    // Cleaning up the listener when the component unmounts
     return () => window.removeEventListener('scroll', updateScrollDirection);
   }, [scrollDirection]);
 
   return scrollDirection;
 }
 
+// Navigation component
 const Navigation = () => {
   const router = useRouter();
   const scrollDirection = useScrollDirection();
 
+  // Helper function to determine if the current route matches the provided path
   const isActive = (pathname: string) => router.pathname === pathname;
 
   return (
