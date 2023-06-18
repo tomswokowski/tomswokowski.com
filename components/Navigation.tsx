@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,18 +14,18 @@ const Navigation = () => {
 
   const isActive = (pathname: string) => router.pathname === pathname;
 
-  const checkScroll = () => {
+  const checkScroll = useCallback(() => {
     const currentScrollPos = window.pageYOffset;
     const visible =
       currentScrollPos < navHeight || prevScrollPos > currentScrollPos;
     setIsHidden(!visible);
     setPrevScrollPos(currentScrollPos);
-  };
+  }, [navHeight, prevScrollPos]);
 
   useEffect(() => {
     window.addEventListener('scroll', checkScroll);
     return () => window.removeEventListener('scroll', checkScroll);
-  }, [prevScrollPos]);
+  }, [checkScroll]);
 
   useEffect(() => {
     if (navRef.current) {
@@ -33,7 +33,7 @@ const Navigation = () => {
       navRef.current.style.position =
         prevScrollPos > navHeight ? 'fixed' : 'relative';
     }
-  }, [prevScrollPos, isHidden]);
+  }, [prevScrollPos, isHidden, navHeight]);
 
   return (
     <div
@@ -44,7 +44,9 @@ const Navigation = () => {
     >
       <div className="flex justify-between items-center text-primary p-4 pb-4">
         <div>
-          <h1 className="text-base font-semibold">Tom Swokowski's Blog</h1>
+          <h1 className="text-base font-semibold">
+            Tom Swokowski&rsquo;s Blog
+          </h1>
           <h3 className="text-sm">Things About Tech</h3>
         </div>
         <div className="flex space-x-4">
