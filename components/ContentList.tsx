@@ -4,22 +4,26 @@ import ContentListItem from './ContentListItem';
 type ContentItem = {
   slug: string;
   title: string;
-  content: string;
+  description: string;
+  datePosted: string;
+  author: string;
 };
 
 type ContentListProps = {
-  content: ContentItem[];
+  contentItems: ContentItem[];
   type: string;
 };
 
-const ContentList: React.FC<ContentListProps> = ({ content, type }) => {
+const ContentList: React.FC<ContentListProps> = ({ contentItems, type }) => {
   return (
-    <div>
-      {content.map((item) => (
+    <div className={type === 'posts' ? 'py-4 mx-3' : ''}>
+      {contentItems.map((item) => (
         <ContentListItem
           key={item.slug}
           title={item.title}
-          content={item.content}
+          description={item.description}
+          datePosted={item.datePosted}
+          author={item.author}
           slug={item.slug}
           type={type}
         />

@@ -33,13 +33,15 @@ async function getAllContent(type: 'posts' | 'projects') {
         return {
           slug,
           title: matterResult.data.title,
-          content: contentHtml,
+          description: matterResult.data.description,
+          datePosted: matterResult.data.datePosted,
+          author: matterResult.data.author,
         };
       } catch (error) {
         console.error(`Error processing file ${fileName}:`, error);
         throw error;
       }
-    }),
+    })
   );
   return allContentData;
 }
@@ -56,6 +58,9 @@ async function getContentData(type: 'posts' | 'projects', slug: string) {
     return {
       slug,
       title: matterResult.data.title,
+      description: matterResult.data.description,
+      datePosted: matterResult.data.datePosted,
+      author: matterResult.data.author,
       content: contentHtml,
     };
   } catch (error) {

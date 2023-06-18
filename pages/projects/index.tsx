@@ -3,16 +3,19 @@ import ContentList from '../../components/ContentList';
 import { getAllContent } from '../../utils/content';
 
 type ProjectProps = {
-  projects: { slug: string; title: string; content: string }[];
+  projects: {
+    slug: string;
+    title: string;
+    description: string;
+    datePosted: string;
+    author: string;
+  }[];
 };
 
 const Projects: NextPage<ProjectProps> = ({ projects }) => {
   return (
     <>
-      <ContentList
-        content={projects}
-        type="projects"
-      />
+      <ContentList contentItems={projects} type="projects" />
     </>
   );
 };
