@@ -5,7 +5,7 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const DefaultLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="max-w-5xl mx-auto px-4">
       <Navigation />
@@ -14,4 +14,4 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default DefaultLayout;
