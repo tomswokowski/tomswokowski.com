@@ -42,8 +42,10 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
               alt="placeholder"
               className="w-full h-56 md:h-80 object-cover"
             />
-            <h2 className="text-md font-semibold pb-2">{title}</h2>
-            <p className="text-sm">{description}</p>
+            <div className="px-2 my-4">
+              <h2 className="text-md font-semibold pb-2">{title}</h2>
+              <p className="text-sm">{description}</p>
+            </div>
           </div>
         ) : (
           <div className="py-4 flex justify-between items-start w-full">
@@ -56,11 +58,15 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
                 {truncatedDescriptionLong}
               </p>
             </div>
-            <img src="https://placehold.co/75x75" alt="placeholder" />
+            <img src="https://placehold.co/100x100" alt="placeholder" />
           </div>
         )}
 
-        <div className="flex justify-between items-center mt-4 pb-4 text-sm">
+        <div
+          className={`flex justify-between items-center text-sm ${
+            type === 'projects' ? 'px-2 mb-6' : 'pb-4'
+          }`}
+        >
           <div className="flex justify-start space-x-1 text-xs">
             <time>{datePosted}</time>
             <span> • </span>
