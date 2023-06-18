@@ -9,7 +9,16 @@ module.exports = {
         primary: '#0C2340',
         secondary: '#E87722',
         gray: {
-          700: '#4B5563',
+          DEFAULT: '#7D7D7D',
+          100: '#F5F5F5',
+          200: '#EEEEEE',
+          300: '#E0E0E0',
+          400: '#BDBDBD',
+          500: '#9E9E9E',
+          600: '#757575',
+          700: '#616161',
+          800: '#424242',
+          900: '#212121',
         },
       },
       typography: (theme) => ({
@@ -21,9 +30,6 @@ module.exports = {
               '&:hover': {
                 color: theme('colors.secondary'),
               },
-            },
-            h1: {
-              color: theme('colors.primary'),
             },
             h2: {
               fontWeight: '700',
@@ -44,7 +50,7 @@ module.exports = {
             'blockquote p:last-of-type::after': false,
             code: {
               color: theme('colors.secondary'),
-              backgroundColor: theme('colors.gray.800'),
+              backgroundColor: theme('colors.gray.100'),
               paddingLeft: '0.25rem',
               paddingRight: '0.25rem',
               paddingTop: '0.125rem',
@@ -59,6 +65,18 @@ module.exports = {
             },
             img: {
               borderRadius: theme('borderRadius.lg'),
+            },
+            blockquote: {
+              color: theme('colors.gray.800'),
+              borderLeftColor: theme('colors.gray.200'),
+            },
+            table: {
+              color: theme('colors.gray.700'),
+              borderColor: theme('colors.gray.200'),
+              thead: {
+                color: theme('colors.primary'),
+                borderBottomColor: theme('colors.gray.300'),
+              },
             },
           },
         },
