@@ -33,8 +33,8 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
       : description;
 
   return (
-    <div className="border-b mx-auto max-w-screen-md flex flex-col">
-      <Link href={href}>
+    <div className="mx-auto max-w-screen-md flex flex-col">
+      <Link href={href} className="mb-6 border-b">
         {type === 'projects' ? (
           <div className="flex flex-col w-full">
             <img
