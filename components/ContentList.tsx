@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentDetail from './ContentDetail';
+import ContentListItem from './ContentListItem';
 
 type ContentItem = {
   slug: string;
@@ -16,7 +16,7 @@ const ContentList: React.FC<ContentListProps> = ({ content, type }) => {
   return (
     <div>
       {content.map((item) => (
-        <ContentDetail
+        <ContentListItem
           key={item.slug}
           title={item.title}
           content={item.content}

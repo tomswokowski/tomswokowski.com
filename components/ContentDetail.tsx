@@ -1,15 +1,20 @@
 import React from 'react';
 
-type ContentDetailProps = {
+type ContentItem = {
+  slug: string;
   title: string;
   content: string;
 };
 
-const ContentDetail: React.FC<ContentDetailProps> = ({ title, content }) => {
+type ContentDetailProps = {
+  content: ContentItem;
+};
+
+const ContentDetail: React.FC<ContentDetailProps> = ({ content }) => {
   return (
     <div>
-      <h2>{title}</h2>
-      <p>{content}</p>
+      <h1>{content.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: content.content }} />
     </div>
   );
 };

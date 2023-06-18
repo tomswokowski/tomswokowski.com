@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import ContentLayout from '../../components/ContentLayout';
+import ContentDetail from '../../components/ContentDetail';
 import { getContentData, getAllContent } from '../../utils/content';
 
 const Project: NextPage<{
@@ -12,7 +12,7 @@ const Project: NextPage<{
     return <div>Loading...</div>;
   }
 
-  return <ContentLayout content={project} />;
+  return <ContentDetail content={project} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

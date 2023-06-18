@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import ContentLayout from '../components/ContentLayout';
+import ContentDetail from '../components/ContentDetail';
 import { getContentData, getAllContent } from '../utils/content';
 
 const Post: NextPage<{
@@ -12,7 +12,7 @@ const Post: NextPage<{
     return <div>Loading...</div>;
   }
 
-  return <ContentLayout content={post} />;
+  return <ContentDetail content={post} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   };
 };
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getAllContent('posts');
   return {
