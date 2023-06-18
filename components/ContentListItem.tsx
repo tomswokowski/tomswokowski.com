@@ -22,13 +22,28 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
 }) => {
   const href = type === 'posts' ? `/${slug}` : `/${type}/${slug}`;
 
+  const truncatedDescriptionShort =
+    description.length > 65
+      ? description.substring(0, 65) + '...'
+      : description;
+
+  const truncatedDescriptionLong =
+    description.length > 100
+      ? description.substring(0, 100) + '...'
+      : description;
+
   return (
     <div className="p-4 border-b mx-auto max-w-screen-md">
       <Link href={href}>
         <div className="flex justify-between">
           <div className="w-2/3 md:w-1/2">
-            <h2 className="text-xl pb-2">{title}</h2>
-            <p className="text-sm">{description}</p>
+            <h2 className="text-md font-semibold pb-2">{title}</h2>
+            <p className="text-sm block md:hidden">
+              {truncatedDescriptionShort}
+            </p>
+            <p className="text-sm hidden md:block">
+              {truncatedDescriptionLong}
+            </p>
           </div>
           <img src="https://placehold.co/75x75" alt="placeholder" />
         </div>
