@@ -40,6 +40,10 @@ const Navigation = () => {
   // Helper function to determine if the current route matches the provided path
   const isActive = (pathname: string) => router.pathname === pathname;
 
+  // LinkedIn and GitHub URLs
+  const linkedinUrl = process.env.NEXT_PUBLIC_LINKEDIN_URL;
+  const githubUrl = process.env.NEXT_PUBLIC_GITHUB_URL;
+
   return (
     <div
       className={`border-b-2 bg-white w-full z-10 transition-all duration-500 sticky ${
@@ -55,7 +59,7 @@ const Navigation = () => {
         </div>
         <div className="flex space-x-4">
           <a
-            href="https://github.com"
+            href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -66,7 +70,7 @@ const Navigation = () => {
             />
           </a>
           <a
-            href="https://linkedin.com"
+            href={linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
