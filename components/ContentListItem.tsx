@@ -33,20 +33,20 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
       : description;
 
   return (
-    <div className="p-4 border-b mx-auto max-w-screen-md flex flex-col">
+    <div className="border-b mx-auto max-w-screen-md flex flex-col">
       <Link href={href}>
         {type === 'projects' ? (
           <div className="flex flex-col w-full">
             <img
               src="https://placehold.co/75x75"
               alt="placeholder"
-              className="w-full"
+              className="w-full h-30 md:h-32 object-cover"
             />
             <h2 className="text-md font-semibold pb-2">{title}</h2>
-            <p className="text-sm">{truncatedDescriptionLong}</p>
+            <p className="text-sm">{description}</p>
           </div>
         ) : (
-          <div className="flex justify-between items-start w-full">
+          <div className="py-4 flex justify-between items-start w-full">
             <div className="w-2/3 md:w-1/2">
               <h2 className="text-md font-semibold pb-2">{title}</h2>
               <p className="text-sm block md:hidden">
@@ -60,7 +60,7 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
           </div>
         )}
 
-        <div className="flex justify-between items-center mt-4 text-sm">
+        <div className="flex justify-between items-center mt-4 pb-4 text-sm">
           <div className="flex justify-start space-x-1 text-xs">
             <time>{datePosted}</time>
             <span> • </span>

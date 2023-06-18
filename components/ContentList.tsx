@@ -16,7 +16,7 @@ type ContentListProps = {
 
 const ContentList: React.FC<ContentListProps> = ({ contentItems, type }) => {
   return (
-    <div className="mx-3 py-4">
+    <div className={type === 'posts' ? 'py-4 mx-3' : ''}>
       {contentItems.map((item) => (
         <ContentListItem
           key={item.slug}
