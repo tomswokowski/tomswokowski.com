@@ -7,10 +7,7 @@ const Home: NextPage<{
 }> = ({ posts }) => {
   return (
     <>
-      <ContentList
-        content={posts}
-        type="posts"
-      />
+      <ContentList content={posts} type="posts" />
     </>
   );
 };

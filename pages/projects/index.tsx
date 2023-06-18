@@ -9,10 +9,7 @@ type ProjectProps = {
 const Projects: NextPage<ProjectProps> = ({ projects }) => {
   return (
     <>
-      <ContentList
-        content={projects}
-        type="projects"
-      />
+      <ContentList content={projects} type="projects" />
     </>
   );
 };

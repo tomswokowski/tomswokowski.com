@@ -39,7 +39,7 @@ async function getAllContent(type: 'posts' | 'projects') {
         console.error(`Error processing file ${fileName}:`, error);
         throw error;
       }
-    }),
+    })
   );
   return allContentData;
 }
