@@ -20,7 +20,6 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
 
   useEffect(() => {
     const fetchContent = async () => {
-      // Fetching both posts and projects and combining them
       const postsRes = await fetch(`/api/content?type=posts`);
       const posts: ContentItem[] = await postsRes.json();
       const projectsRes = await fetch(`/api/content?type=projects`);
@@ -81,7 +80,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
         </div>
       </div>
 
-      <div className="py-2">
+      <div className="py-2 relative w-full max-w-2xl max-h-full mx-auto mt-6">
         {searchValue === ''
           ? 'Search tomswokowski.com...'
           : filteredContentItems.length === 0
