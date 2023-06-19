@@ -14,20 +14,15 @@ type SearchModalProps = {
   onClose: () => void;
 };
 
-const apiUrl =
-  process.env.NODE_ENV === 'production'
-    ? `https://${process.env.VERCEL_URL}/api/content`
-    : '/api/content';
-
 const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
   const [searchValue, setSearchValue] = useState('');
   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
 
   useEffect(() => {
     const fetchContent = async () => {
-      const postsRes = await fetch(`${apiUrl}?type=posts`);
+      const postsRes = await fetch(`/api/content?type=posts`);
       const posts: ContentItem[] = await postsRes.json();
-      const projectsRes = await fetch(`${apiUrl}?type=projects`);
+      const projectsRes = await fetch(`/api/content?type=projects`);
       const projects: ContentItem[] = await projectsRes.json();
       setContentItems([...posts, ...projects]);
     };
