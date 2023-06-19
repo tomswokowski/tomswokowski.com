@@ -1,5 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 import ContentList from '../components/ContentList';
+import { getAllContent } from '../lib/getAllContent';
 
 type PostType = {
   slug: string;
@@ -21,10 +22,7 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=posts`,
-  );
-  const posts: PostType[] = await res.json();
+  const posts: PostType[] = await getAllContent('posts');
 
   return {
     props: {
