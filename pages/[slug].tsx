@@ -1,26 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import ContentDetail from '../components/ContentDetail';
-
-const Post: NextPage<{
-  post: {
-    slug: string;
-    title: string;
-    content: string;
-    description: string;
-    datePosted: string;
-    author: string;
-    type: string;
-  };
-}> = ({ post }) => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
-  return <ContentDetail content={post} />;
-};
+import { getAllContent } from '../lib/getAllContent';
 
 type PostType = {
   slug: string;
@@ -32,12 +13,28 @@ type PostType = {
   type: string;
 };
 
+const Post: NextPage<{ post: PostType }> = ({ post }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
+  return <ContentDetail content={post} />;
+};
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=posts`,
-  );
-  const posts = await res.json();
-  const post = posts.find((p: PostType) => p.slug === params?.slug);
+  const posts = await getAllContent('posts');
+
+  // Define slug here and check if it's undefined
+  const slug = params?.slug;
+  if (typeof slug !== 'string') {
+    return {
+      notFound: true,
+    };
+  }
+
+  const post = posts.find((p: PostType) => p.slug === slug);
 
   // If the post doesn't exist, return 404
   if (!post) {
@@ -54,12 +51,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=posts`,
-  );
-  const posts = await res.json();
+  const posts = await getAllContent('posts');
   return {
-    paths: posts.map((post: PostType) => ({ params: { slug: post.slug } })),
+    paths: posts.map((post: PostType) => ({
+      params: { slug: post.slug },
+    })),
     fallback: true,
   };
 };

@@ -1,18 +1,19 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import ContentDetail from '../../components/ContentDetail';
+import { getAllContent } from '../../lib/getAllContent';
 
-const Project: NextPage<{
-  project: {
-    slug: string;
-    title: string;
-    content: string;
-    description: string;
-    datePosted: string;
-    author: string;
-    type: string;
-  };
-}> = ({ project }) => {
+type ProjectType = {
+  slug: string;
+  title: string;
+  content: string;
+  description: string;
+  datePosted: string;
+  author: string;
+  type: string;
+};
+
+const Project: NextPage<{ project: ProjectType }> = ({ project }) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -22,21 +23,18 @@ const Project: NextPage<{
   return <ContentDetail content={project} />;
 };
 
-type ProjectType = {
-  slug: string;
-  title: string;
-  content: string;
-  description: string;
-  datePosted: string;
-  author: string;
-};
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=projects`,
-  );
-  const projects = await res.json();
-  const project = projects.find((p: ProjectType) => p.slug === params?.slug);
+  const projects = await getAllContent('projects');
+
+  // Define slug here and check if it's undefined
+  const slug = params?.slug;
+  if (typeof slug !== 'string') {
+    return {
+      notFound: true,
+    };
+  }
+
+  const project = projects.find((p: ProjectType) => p.slug === slug);
 
   // If the project doesn't exist, return 404
   if (!project) {
@@ -53,10 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=projects`,
-  );
-  const projects = await res.json();
+  const projects = await getAllContent('projects');
   return {
     paths: projects.map((project: ProjectType) => ({
       params: { slug: project.slug },
