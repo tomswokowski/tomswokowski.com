@@ -95,6 +95,7 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
         <ShareContent
           url={window.location.origin + href}
           onClose={handleClose}
+          contentName={title}
         />
       )}
     </>

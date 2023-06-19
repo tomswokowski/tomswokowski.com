@@ -11,10 +11,15 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 type ShareContentProps = {
   url: string;
+  contentName: string;
   onClose: () => void;
 };
 
-const ShareContent: React.FC<ShareContentProps> = ({ url, onClose }) => {
+const ShareContent: React.FC<ShareContentProps> = ({
+  url,
+  contentName,
+  onClose,
+}) => {
   const [copySuccess, setCopySuccess] = useState('');
 
   const stopPropagation = (e: React.MouseEvent) => {
@@ -68,7 +73,9 @@ const ShareContent: React.FC<ShareContentProps> = ({ url, onClose }) => {
             <div className="px-6 pb-6">
               <div className="flex flex-col items-center mt-3 text-center">
                 <div className="text-2xl">Share this content:</div>
-                <h3 className="mb-4 text-secondary font-semibold">post name</h3>
+                <h3 className="mb-4 text-secondary font-semibold">
+                  {contentName}
+                </h3>
                 <div className="flex justify-center w-full mb-4">
                   <EmailShareButton url={url} className="mx-2">
                     <EmailIcon size={32} round />
