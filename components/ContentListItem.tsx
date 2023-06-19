@@ -24,7 +24,10 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
 
   return (
     <div className="mx-auto max-w-screen-md flex flex-col">
-      <Link href={href} className="mb-6 border-b">
+      <Link
+        href={href}
+        className="mb-6 border-b"
+      >
         {type === 'projects' ? (
           <div className="flex flex-col w-full">
             <img
@@ -43,7 +46,10 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
               <h2 className="text-md font-semibold pb-2">{title}</h2>
               <p className="text-sm line-clamp-2">{description}</p>
             </div>
-            <img src="https://placehold.co/100x100" alt="placeholder" />
+            <img
+              src="https://placehold.co/100x100"
+              alt="placeholder"
+            />
           </div>
         )}
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import SearchModal from './SearchModal';
 
 // Custom hook for detecting the direction of the scroll
 function useScrollDirection() {
@@ -36,6 +37,16 @@ function useScrollDirection() {
 const Navigation = () => {
   const router = useRouter();
   const scrollDirection = useScrollDirection();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSearchClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   // Helper function to determine if the current route matches the provided path
   const isActive = (pathname: string) => router.pathname === pathname;
@@ -76,14 +87,22 @@ const Navigation = () => {
           <h3 className="text-sm">Tech and Other Things</h3>
         </div>
         <div className="flex space-x-4">
-          <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon
               icon={faGithub}
               className="text-primary"
               size="xl"
             />
           </a>
-          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
+          <a
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon
               icon={faLinkedin}
               className="text-primary"
@@ -94,6 +113,7 @@ const Navigation = () => {
             icon={faSearch}
             className="text-primary cursor-pointer"
             size="xl"
+            onClick={handleSearchClick}
           />
         </div>
       </div>
@@ -121,6 +141,9 @@ const Navigation = () => {
           </ul>
         </nav>
       )}
+
+      {/* Search Modal */}
+      {showModal && <SearchModal onClose={handleCloseModal} />}
     </div>
   );
 };

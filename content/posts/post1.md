@@ -1,6 +1,7 @@
 ---
+type: posts
 slug: post1
-title: Introduction to React
+title: Introduction to React!
 description: This is a brief introduction to React. We will go over some of the key concepts and how to create a basic React component.
 datePosted: June 17, 2023
 author: Tom Swokowski
