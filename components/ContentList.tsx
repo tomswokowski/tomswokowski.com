@@ -24,7 +24,7 @@ const ContentList: React.FC<ContentListProps> = ({
       {contentItems.map((item) => (
         <div
           key={item.slug}
-          className={item.type === 'posts' ? 'py-4 mx-3' : ''}
+          className={item.type === 'posts' ? 'py-4 mx-3' : 'mb-6'}
         >
           <ContentListItem
             title={item.title}
