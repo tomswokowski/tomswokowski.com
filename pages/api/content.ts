@@ -51,6 +51,7 @@ async function getAllContent(type: 'posts' | 'projects') {
         }
         return {
           slug,
+          type: matterResult.data.type,
           title: matterResult.data.title,
           description: matterResult.data.description,
           datePosted: matterResult.data.datePosted,

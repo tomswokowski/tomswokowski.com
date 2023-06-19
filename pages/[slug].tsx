@@ -29,6 +29,7 @@ type PostType = {
   description: string;
   datePosted: string;
   author: string;
+  type: string;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

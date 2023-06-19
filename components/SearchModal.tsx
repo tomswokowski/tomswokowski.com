@@ -7,6 +7,7 @@ type ContentItem = {
   description: string;
   datePosted: string;
   author: string;
+  type: string;
 };
 
 type SearchModalProps = {
@@ -90,10 +91,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
 
       {/* Search Results */}
       {searchValue !== '' && filteredContentItems.length > 0 && (
-        <ContentList
-          contentItems={filteredContentItems}
-          type="posts"
-        />
+        <ContentList contentItems={filteredContentItems} />
       )}
     </div>
   );

@@ -7,28 +7,32 @@ type ContentItem = {
   description: string;
   datePosted: string;
   author: string;
+  type: string;
 };
 
 type ContentListProps = {
   contentItems: ContentItem[];
-  type: string;
 };
 
-const ContentList: React.FC<ContentListProps> = ({ contentItems, type }) => {
+const ContentList: React.FC<ContentListProps> = ({ contentItems }) => {
   return (
-    <div className={type === 'posts' ? 'py-4 mx-3' : ''}>
+    <>
       {contentItems.map((item) => (
-        <ContentListItem
+        <div
           key={item.slug}
-          title={item.title}
-          description={item.description}
-          datePosted={item.datePosted}
-          author={item.author}
-          slug={item.slug}
-          type={type}
-        />
+          className={item.type === 'posts' ? 'py-4 mx-3' : ''}
+        >
+          <ContentListItem
+            title={item.title}
+            description={item.description}
+            datePosted={item.datePosted}
+            author={item.author}
+            slug={item.slug}
+            type={item.type}
+          />
+        </div>
       ))}
-    </div>
+    </>
   );
 };
 

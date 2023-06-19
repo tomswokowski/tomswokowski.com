@@ -1,4 +1,5 @@
 ---
+type: projects
 slug: project1
 title: Building a Blog with React and Next.js
 description: In this project, we built a blog using React and Next.js. The blog supports markdown posts.

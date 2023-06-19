@@ -7,6 +7,7 @@ type ProjectType = {
   description: string;
   datePosted: string;
   author: string;
+  type: string;
 };
 
 const Projects: NextPage<{
@@ -14,10 +15,7 @@ const Projects: NextPage<{
 }> = ({ projects }) => {
   return (
     <>
-      <ContentList
-        contentItems={projects}
-        type="projects"
-      />
+      <ContentList contentItems={projects} />
     </>
   );
 };

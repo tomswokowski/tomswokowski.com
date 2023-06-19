@@ -1,4 +1,5 @@
 ---
+type: posts
 slug: post2
 title: Exploring Next.js
 description: This is a brief introduction to Next.js. We will go over some of the key concepts and how to create a basic Next.js app.

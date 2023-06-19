@@ -1,4 +1,5 @@
 ---
+type: projects
 slug: project2
 title: Building a E-commerce Store with React
 description: In this project, we built an e-commerce store using React. We integrated with a third-party API for product information.

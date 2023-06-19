@@ -7,6 +7,7 @@ type PostType = {
   description: string;
   datePosted: string;
   author: string;
+  type: string;
 };
 
 const Home: NextPage<{
@@ -14,10 +15,7 @@ const Home: NextPage<{
 }> = ({ posts }) => {
   return (
     <>
-      <ContentList
-        contentItems={posts}
-        type="posts"
-      />
+      <ContentList contentItems={posts} />
     </>
   );
 };
