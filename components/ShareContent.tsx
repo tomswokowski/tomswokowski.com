@@ -29,7 +29,7 @@ const ShareContent: React.FC<ShareContentProps> = ({ url, onClose }) => {
       aria-modal="true"
       onClick={onClose}
     >
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
         <div
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           aria-hidden="true"
@@ -41,14 +41,35 @@ const ShareContent: React.FC<ShareContentProps> = ({ url, onClose }) => {
           &#8203;
         </span>
         <div
-          className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          className="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 align-middle max-w-lg w-full"
           onClick={stopPropagation}
         >
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div className="sm:flex sm:items-start">
-              <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3 className="text-2xl mb-4">Share this content</h3>
-                <div className="flex justify-center w-3/4 mb-4">
+          <div className="relative">
+            <button
+              type="button"
+              className="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm p-2 ml-auto flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              onClick={onClose}
+            >
+              <svg
+                aria-hidden="true"
+                className="w-7 h-7"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <span className="sr-only">Close modal</span>
+            </button>
+            <div className="px-6 pb-6">
+              <div className="flex flex-col items-center mt-3 text-center">
+                <div className="text-2xl">Share this content:</div>
+                <h3 className="mb-4 text-secondary font-semibold">post name</h3>
+                <div className="flex justify-center w-full mb-4">
                   <EmailShareButton url={url} className="mx-2">
                     <EmailIcon size={32} round />
                   </EmailShareButton>
@@ -68,7 +89,7 @@ const ShareContent: React.FC<ShareContentProps> = ({ url, onClose }) => {
                   </button>
                 </CopyToClipboard>
                 {copySuccess && (
-                  <span className="mt-2 text-green-500">{copySuccess}</span>
+                  <div className="mt-2 text-green-500">{copySuccess}</div>
                 )}
               </div>
             </div>
