@@ -12,9 +12,13 @@ type ContentItem = {
 
 type ContentListProps = {
   contentItems: ContentItem[];
+  onSelect?: () => void;
 };
 
-const ContentList: React.FC<ContentListProps> = ({ contentItems }) => {
+const ContentList: React.FC<ContentListProps> = ({
+  contentItems,
+  onSelect,
+}) => {
   return (
     <>
       {contentItems.map((item) => (
@@ -29,6 +33,7 @@ const ContentList: React.FC<ContentListProps> = ({ contentItems }) => {
             author={item.author}
             slug={item.slug}
             type={item.type}
+            onSelect={onSelect}
           />
         </div>
       ))}

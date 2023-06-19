@@ -44,7 +44,7 @@ const Navigation = () => {
     setShowModal(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseSearchModal = () => {
     setShowModal(false);
   };
 
@@ -87,22 +87,14 @@ const Navigation = () => {
           <h3 className="text-sm">Tech and Other Things</h3>
         </div>
         <div className="flex space-x-4">
-          <a
-            href={githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={githubUrl} target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon
               icon={faGithub}
               className="text-primary"
               size="xl"
             />
           </a>
-          <a
-            href={linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon
               icon={faLinkedin}
               className="text-primary"
@@ -143,7 +135,7 @@ const Navigation = () => {
       )}
 
       {/* Search Modal */}
-      {showModal && <SearchModal onClose={handleCloseModal} />}
+      {showModal && <SearchModal onSelect={handleCloseSearchModal} />}
     </div>
   );
 };

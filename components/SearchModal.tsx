@@ -11,10 +11,10 @@ type ContentItem = {
 };
 
 type SearchModalProps = {
-  onClose: () => void;
+  onSelect: () => void;
 };
 
-const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
+const SearchModal: React.FC<SearchModalProps> = ({ onSelect }) => {
   const [searchValue, setSearchValue] = useState('');
   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
 
@@ -32,7 +32,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
 
   // Filter the content based on the search term
   const filteredContentItems = contentItems.filter((item) =>
-    item.title.toLowerCase().includes(searchValue.toLowerCase()),
+    item.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -59,7 +59,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
             <button
               type="button"
               className="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm p-2 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-              onClick={onClose}
+              onClick={onSelect}
             >
               <svg
                 aria-hidden="true"
@@ -90,7 +90,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
 
       {/* Search Results */}
       {searchValue !== '' && filteredContentItems.length > 0 && (
-        <ContentList contentItems={filteredContentItems} />
+        <ContentList contentItems={filteredContentItems} onSelect={onSelect} />
       )}
     </div>
   );
