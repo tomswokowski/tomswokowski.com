@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContentList from './ContentList';
 
 type ContentItem = {
@@ -15,20 +15,24 @@ type SearchModalProps = {
 
 const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
   const [searchValue, setSearchValue] = useState('');
+  const [contentItems, setContentItems] = useState<ContentItem[]>([]);
 
-  let contentItems = [
-    {
-      slug: 'zzz',
-      title: 'zzz',
-      description: 'zzz',
-      datePosted: 'zzz',
-      author: 'zzz',
-    },
-  ];
+  useEffect(() => {
+    const fetchContent = async () => {
+      // Fetching both posts and projects and combining them
+      const postsRes = await fetch(`/api/content?type=posts`);
+      const posts: ContentItem[] = await postsRes.json();
+      const projectsRes = await fetch(`/api/content?type=projects`);
+      const projects: ContentItem[] = await projectsRes.json();
+      setContentItems([...posts, ...projects]);
+    };
+
+    fetchContent();
+  }, []);
 
   // Filter the content based on the search term
   const filteredContentItems = contentItems.filter((item) =>
-    item.title.includes(searchValue),
+    item.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
   return (
@@ -65,9 +69,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
               <span className="sr-only">Close modal</span>
@@ -76,7 +80,6 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Conditional message */}
       <div className="py-2">
         {searchValue === ''
           ? 'Search tomswokowski.com...'
@@ -89,7 +92,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
       {searchValue !== '' && filteredContentItems.length > 0 && (
         <ContentList
           contentItems={filteredContentItems}
-          type="search"
+          type="posts"
         />
       )}
     </div>
