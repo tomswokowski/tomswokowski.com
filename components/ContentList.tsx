@@ -12,7 +12,7 @@ type ContentItem = {
 
 type ContentListProps = {
   contentItems: ContentItem[];
-  onSelect: () => void;
+  onSelect?: () => void;
 };
 
 const ContentList: React.FC<ContentListProps> = ({
