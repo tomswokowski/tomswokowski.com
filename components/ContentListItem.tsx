@@ -47,7 +47,7 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
   return (
     <>
       <div
-        className="mx-auto max-w-screen-md flex flex-col"
+        className="border-b mx-auto max-w-screen-md flex flex-col"
         onClick={handleItemClick}
       >
         {type === 'projects' ? (
