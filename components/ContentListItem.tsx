@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 type ContentListItemProps = {
   title: string;
@@ -10,6 +11,7 @@ type ContentListItemProps = {
   datePosted: string;
   author: string;
   type: string;
+  onSelect?: () => void;
 };
 
 const ContentListItem: React.FC<ContentListItemProps> = ({
@@ -19,15 +21,25 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
   datePosted,
   author,
   type,
+  onSelect,
 }) => {
   const href = type === 'posts' ? `/${slug}` : `/${type}/${slug}`;
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (onSelect) {
+      e.preventDefault();
+      onSelect();
+      router.push(href);
+    }
+  };
 
   return (
-    <div className="mx-auto max-w-screen-md flex flex-col">
-      <Link
-        href={href}
-        className="mb-6 border-b"
-      >
+    <div
+      className="mx-auto max-w-screen-md flex flex-col"
+      onClick={handleClick}
+    >
+      <Link href={href} className="mb-6 border-b">
         {type === 'projects' ? (
           <div className="flex flex-col w-full">
             <img
@@ -46,10 +58,7 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
               <h2 className="text-md font-semibold pb-2">{title}</h2>
               <p className="text-sm line-clamp-2">{description}</p>
             </div>
-            <img
-              src="https://placehold.co/100x100"
-              alt="placeholder"
-            />
+            <img src="https://placehold.co/100x100" alt="placeholder" />
           </div>
         )}
 
