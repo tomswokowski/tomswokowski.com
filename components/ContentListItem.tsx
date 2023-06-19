@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import ShareContent from './ShareContent';
 
 type ContentListItemProps = {
   title: string;
@@ -23,23 +23,33 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
   type,
   onSelect,
 }) => {
+  const [showShareContent, setShowShareContent] = useState(false);
   const href = type === 'posts' ? `/${slug}` : `/${type}/${slug}`;
   const router = useRouter();
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleItemClick = (e: React.MouseEvent) => {
     if (onSelect) {
-      e.preventDefault();
       onSelect();
-      router.push(href);
     }
+    e.preventDefault();
+    router.push(href);
+  };
+
+  const handleShareClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowShareContent(true);
+  };
+
+  const handleClose = () => {
+    setShowShareContent(false);
   };
 
   return (
-    <div
-      className="mx-auto max-w-screen-md flex flex-col"
-      onClick={handleClick}
-    >
-      <Link href={href} className="mb-6 border-b">
+    <>
+      <div
+        className="border-b mx-auto max-w-screen-md flex flex-col"
+        onClick={handleItemClick}
+      >
         {type === 'projects' ? (
           <div className="flex flex-col w-full">
             <img
@@ -72,7 +82,7 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
             <span> • </span>
             <span>{author}</span>
           </div>
-          <button>
+          <button onClick={handleShareClick}>
             <FontAwesomeIcon
               icon={faShareFromSquare}
               className="text-primary"
@@ -80,8 +90,15 @@ const ContentListItem: React.FC<ContentListItemProps> = ({
             />
           </button>
         </div>
-      </Link>
-    </div>
+      </div>
+      {showShareContent && (
+        <ShareContent
+          url={window.location.origin + href}
+          onClose={handleClose}
+          contentName={title}
+        />
+      )}
+    </>
   );
 };
 
