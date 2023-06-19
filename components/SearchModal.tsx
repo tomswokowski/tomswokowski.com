@@ -1,4 +1,13 @@
 import { useState } from 'react';
+import ContentList from './ContentList';
+
+type ContentItem = {
+  slug: string;
+  title: string;
+  description: string;
+  datePosted: string;
+  author: string;
+};
 
 type SearchModalProps = {
   onClose: () => void;
@@ -6,6 +15,21 @@ type SearchModalProps = {
 
 const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
   const [searchValue, setSearchValue] = useState('');
+
+  let contentItems = [
+    {
+      slug: 'zzz',
+      title: 'zzz',
+      description: 'zzz',
+      datePosted: 'zzz',
+      author: 'zzz',
+    },
+  ];
+
+  // Filter the content based on the search term
+  const filteredContentItems = contentItems.filter((item) =>
+    item.title.includes(searchValue),
+  );
 
   return (
     <div
@@ -27,7 +51,6 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
               placeholder="Search..."
               className="w-full p-2 border-b focus:outline-none focus:bg-transparent"
             />
-            {/* Search Results should be listed here */}
 
             <button
               type="button"
@@ -52,6 +75,23 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
           </div>
         </div>
       </div>
+
+      {/* Conditional message */}
+      <div className="py-2">
+        {searchValue === ''
+          ? 'Search tomswokowski.com...'
+          : filteredContentItems.length === 0
+          ? `No results for: ${searchValue}`
+          : ''}
+      </div>
+
+      {/* Search Results */}
+      {searchValue !== '' && filteredContentItems.length > 0 && (
+        <ContentList
+          contentItems={filteredContentItems}
+          type="search"
+        />
+      )}
     </div>
   );
 };

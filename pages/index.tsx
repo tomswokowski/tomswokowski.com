@@ -1,25 +1,33 @@
 import type { GetStaticProps, NextPage } from 'next';
 import ContentList from '../components/ContentList';
-import { getAllContent } from '../utils/content';
+
+type PostType = {
+  slug: string;
+  title: string;
+  description: string;
+  datePosted: string;
+  author: string;
+};
 
 const Home: NextPage<{
-  posts: {
-    slug: string;
-    title: string;
-    description: string;
-    datePosted: string;
-    author: string;
-  }[];
+  posts: PostType[];
 }> = ({ posts }) => {
   return (
     <>
-      <ContentList contentItems={posts} type="posts" />
+      <ContentList
+        contentItems={posts}
+        type="posts"
+      />
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getAllContent('posts');
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=posts`,
+  );
+  const posts: PostType[] = await res.json();
+
   return {
     props: {
       posts,

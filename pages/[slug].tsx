@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import ContentDetail from '../components/ContentDetail';
-import { getContentData, getAllContent } from '../utils/content';
 
 const Post: NextPage<{
   post: {
@@ -23,8 +22,21 @@ const Post: NextPage<{
   return <ContentDetail content={post} />;
 };
 
+type PostType = {
+  slug: string;
+  title: string;
+  content: string;
+  description: string;
+  datePosted: string;
+  author: string;
+};
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = await getContentData('posts', params?.slug as string);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=posts`,
+  );
+  const posts = await res.json();
+  const post = posts.find((p: PostType) => p.slug === params?.slug);
 
   // If the post doesn't exist, return 404
   if (!post) {
@@ -41,9 +53,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getAllContent('posts');
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/content?type=posts`,
+  );
+  const posts = await res.json();
   return {
-    paths: posts.map((post) => ({ params: { slug: post.slug } })),
+    paths: posts.map((post: PostType) => ({ params: { slug: post.slug } })),
     fallback: true,
   };
 };
